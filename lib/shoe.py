@@ -1,25 +1,21 @@
-#!/usr/bin/env python3
-
 class Shoe:
-    def __init__(self, brand):
+    def __init__(self, brand, size):
         self.brand = brand
+        self._size = None
+        self.size = size  # Use the property setter
+        self.condition = "Used"  # Default condition
 
-    
+    @property
+    def size(self):
+        return self._size
 
-    def get_size(self):
-        try:
-            return self._size
-        except:
-            return
-    
-    def set_size(self, size):
-        if type(size) == int:
-            self._size = size
-        else:
+    @size.setter
+    def size(self, value):
+        if not isinstance(value, int):
             print("size must be an integer")
-    
-    size = property(get_size, set_size)
+        else:
+            self._size = value
 
     def cobble(self):
-        print("Your shoe is as good as new!")
         self.condition = "New"
+        print("Your shoe is as good as new!")
